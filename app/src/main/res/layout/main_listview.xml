@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main_ListView">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/uploadphoto"
+            android:id="@+id/imageView"
             android:layout_alignParentTop="true"
             android:background="@color/colorPrimaryDark"
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:src="@drawable/addPhoto"
+            android:src="@drawable/addphoto"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edtName"
-            android:layout_below="@id/uploadphoto"
+            android:layout_below="@id/imageView"
             android:hint="Name"
             android:layout_centerHorizontal="true"
-            android:ems="10"/>
+            android:ems="10"
+            android:layout_marginTop="5dp"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edtAge"
+            android:id="@+id/edtSemester"
             android:layout_below="@id/edtName"
             android:layout_centerHorizontal="true"
             android:hint="Age"
@@ -37,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Major"
-            android:layout_below="@id/edtAge"
+            android:layout_below="@id/edtSemester"
             android:layout_centerHorizontal="true"
             android:ems="10"
             android:id="@+id/edtMajor"
