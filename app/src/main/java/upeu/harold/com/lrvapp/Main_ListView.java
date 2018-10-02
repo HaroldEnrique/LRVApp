@@ -4,6 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +22,11 @@ import android.widget.Toast;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+
+import upeu.harold.com.lrvapp.db.DBHelper;
+import upeu.harold.com.lrvapp.dto.Student;
+
 public class Main_ListView extends AppCompatActivity {
 
 
@@ -29,6 +37,8 @@ public class Main_ListView extends AppCompatActivity {
 
     final int REQUEST_CODE_GALLERY = 999;
 
+    public static DBHelper mdbhelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +48,20 @@ public class Main_ListView extends AppCompatActivity {
         edtAddress = findViewById(R.id.edtAddress);
         edtMajor = findViewById(R.id.edtMajor);
         edtSemester = findViewById(R.id.edtSemester);
-
+        edtPhone = findViewById(R.id.edtPhone);
         btnAdd = findViewById(R.id.btnAdd);
         btnList = findViewById(R.id.btnList);
 
         mImageView = (ImageView) findViewById(R.id.imageView);
+
+
+        //mdbhelper = new DBHelper(this, "students.sqlite",null, 1);
+        //System.out.println("se creo la base de datos");
+
+        //String tabla = "CREATE TABLE IF NOT EXISTS STUDENT(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT NOT NULL, ESCUELA TEXT,SEMESTER TEXT" +
+         //       ", ADDRESS TEXT, PHONE TEXT,  IMAGE BLOB)";
+        //mdbhelper.queryData(tabla);
+       // System.out.println("Creando las tablas");
 
 
         //select image by onclick
@@ -66,7 +85,40 @@ public class Main_ListView extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
 
+
+                    String mname = edtName.getText().toString().trim();
+                    String mmajor = edtMajor.getText().toString().trim();
+                    String msemest =  edtSemester.getText().toString().trim();
+                    String maddr = edtAddress.getText().toString().trim();
+                    String mphone = edtPhone.getText().toString().trim();
+
+
+                    DBHelper db = new DBHelper(getApplicationContext());
+                    //getActivity().getBaseContext() p---para fragments
+
+                    System.out.println("a punto de insertar " + mname + " , " + mmajor+ " , " +msemest+ " , " +maddr+ " , " + mphone );
+                    //mdbhelper.insertStudent(
+                      //     mname, mmajor, msemest, maddr, mphone,
+                     //       imageViewToByte(mImageView)
+                    //);
+
+                    Student student = new Student(mname, mmajor, msemest,maddr, mphone, imageViewToByte(mImageView));
+                    db.addStudent(student);
+
+                    Toast.makeText(Main_ListView.this,"Added successfully", Toast.LENGTH_SHORT).show();
+                    edtName.setText("");
+                    edtMajor.setText("");
+                    edtSemester.setText("");
+                    edtAddress.setText("");
+                    edtPhone.setText("");
+                    mImageView.setImageResource(R.drawable.addphoto);
+
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -75,11 +127,21 @@ public class Main_ListView extends AppCompatActivity {
         btnList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(Main_ListView.this, StudentListView.class));
 
             }
         });
 
 
+    }
+
+    private static byte[] imageViewToByte(ImageView mImageView) {
+
+        Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 
     @Override

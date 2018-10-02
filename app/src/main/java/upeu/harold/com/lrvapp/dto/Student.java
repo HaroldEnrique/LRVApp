@@ -22,6 +22,21 @@ public class Student {
         this.image = image;
     }
 
+    public Student(int id, String name, String escuela, String phone, byte[] image) {
+        this.id = id;
+        this.name = name;
+        this.escuela = escuela;
+        this.phone = phone;
+        this.image = image;
+    }
+    public Student( String name, String escuela, String phone, byte[] image) {
+
+        this.name = name;
+        this.escuela = escuela;
+        this.phone = phone;
+        this.image = image;
+    }
+
     public int getId() {
         return id;
     }

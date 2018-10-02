@@ -17,8 +17,8 @@
             android:id="@+id/imageView"
             android:layout_alignParentTop="true"
             android:background="@color/colorPrimaryDark"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@drawable/addphoto"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"/>
@@ -37,7 +37,8 @@
             android:id="@+id/edtSemester"
             android:layout_below="@id/edtName"
             android:layout_centerHorizontal="true"
-            android:hint="Age"
+            android:hint="Semester"
+            android:inputType="number"
             android:ems="10" />
         <EditText
             android:layout_width="wrap_content"
@@ -56,7 +57,6 @@
             android:layout_below="@id/edtMajor"
             android:layout_centerHorizontal="true"
             android:ems="10"
-            android:inputType="number"
             android:id="@+id/edtAddress"
             />
         <EditText
@@ -66,29 +66,34 @@
             android:layout_below="@id/edtAddress"
             android:layout_centerHorizontal="true"
             android:ems="10"
+            android:inputType="number"
             android:id="@+id/edtPhone"
             />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save Record"
             android:id="@+id/btnAdd"
-            android:layout_below="@id/edtPhone"
-            android:layout_centerHorizontal="true"
-            android:minWidth="160dp"
             style="@style/Base.Widget.AppCompat.Button.Colored"
-            />
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Student List"
+            android:layout_below="@+id/edtPhone"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="7dp"
+            android:minWidth="150dp"
+            android:text="Save Record" />
+
+        <Button
             android:id="@+id/btnList"
-            android:layout_below="@id/btnAdd"
-            android:layout_centerHorizontal="true"
-            android:minWidth="160dp"
             style="@style/Base.Widget.AppCompat.Button.Colored"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/edtPhone"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="7dp"
+            android:minWidth="150dp"
+            android:text="Student List" />
 
     </RelativeLayout>
 
